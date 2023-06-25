@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>My Form</title>
+    <style>
+        .container{
+            height: 200px;
+            width: 100%;
+            border: 1px solid;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+
+        }
+        .item-text{
+            font-size: 35px;
+            margin: 20px 0px;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <div>
+        <input type="color" id="colorPicker">
+        <!-- <p id="selectedColor" style="height: 50px; width: 50px;">Hello</p> -->
+    </div>
+    <div class="item-text">
+        Result
+    </div>
+    <div class="container" id="selectedColor">
+        <div id="selectedColor">Sample text</div>
+    </div>
+
+    <script>
+        function initializeColorPicker() {
+          const colorInput = document.getElementById('colorPicker');
+          const selectedColorText = document.getElementById('selectedColor');
+          
+          colorInput.addEventListener('input', function(event) {
+            const selectedColor = event.target.value;
+            selectedColorText.style.backgroundColor = selectedColor;
+            const textColor = getTextColor(selectedColor);
+            selectedColorText.style.color = textColor;
+            sampleText.style.color = textColor;
+          });
+
+        }
+    
+
+        // Invoke the function when the DOM is ready
+        document.addEventListener('DOMContentLoaded', initializeColorPicker);
+
+        function getRGB(c) {
+  return parseInt(c, 16) || c
+}
+
+function getsRGB(c) {
+  return getRGB(c) / 255 <= 0.03928
+    ? getRGB(c) / 255 / 12.92
+    : Math.pow((getRGB(c) / 255 + 0.055) / 1.055, 2.4)
+}
+
+function getLuminance(hexColor) {
+  return (
+    0.2126 * getsRGB(hexColor.substr(1, 2)) +
+    0.7152 * getsRGB(hexColor.substr(3, 2)) +
+    0.0722 * getsRGB(hexColor.substr(-2))
+  )
+}
+
+function getContrast(f, b) {
+  const L1 = getLuminance(f)
+  const L2 = getLuminance(b)
+  return (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05)
+}
+
+function getTextColor(bgColor) {
+  const whiteContrast = getContrast(bgColor, '#ffffff')
+  const blackContrast = getContrast(bgColor, '#000000')
+
+  return whiteContrast > blackContrast ? '#ffffff' : '#000000'
+}
+      </script>
+
+</body>
+</html>

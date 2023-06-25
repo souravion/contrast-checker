@@ -1,0 +1,70 @@
+{
+  "name": "contrast-checker",
+  "displayName": "Contrast Checker",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+   
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "contrast-checker.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pull-request-management",
+          "title": "Pull Request Management",
+          "icon": "resources/brush-outline.svg",
+          "command": "contrast-checker.helloWorld"
+        }
+      ]
+    },
+    "views": {
+      "pull-request-management": [
+        {
+          "id": "update",
+          "name": "Pull Request Update"
+        },
+        {
+          "id": "create",
+          "name": "Create Pull Request"
+        }
+      ]
+    }
+  },
+  
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.54.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "@vscode/test-electron": "^2.3.0"
+  }
+
+  
+}
